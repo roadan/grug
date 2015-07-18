@@ -1,0 +1,14 @@
+Flask==0.10.1
+Flask-SQLAlchemy==2.0
+-e git://github.com/kvesteri/flask-storage.git@9a8ac964a0144b505807d98fb055c0d5e23a98e7#egg=Flask_Storage-master
+-e git://github.com/FelixLoether/flask-uploads@9e1266fcc09b344caf3b8f4859304813d17448d0#egg=Flask_Uploads-master
+Jinja2==2.7.3
+MarkupSafe==0.23
+ProxyTypes==0.9
+SQLAlchemy==1.0.6
+Werkzeug==0.10.4
+boto==2.38.0
+itsdangerous==0.24
+python-cloudfiles==1.7.11
+python-loaders==0.2.3
+wsgiref==0.1.2
