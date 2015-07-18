@@ -1,0 +1,8 @@
+<a href="/upload">New Upload</a><br>
+{% for u in uploads %}
+{#<a href="{{ (Storage().url(u.name) }}">{{ u.name }}</a>#}
+<a href="{{ u.url }}">{{ u.name }}</a>
+<form action="/delete/{{ u.id }}" method="POST">
+    <button type="submit">Delete</button>
+    </form><br>
+{% endfor %}

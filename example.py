@@ -1,5 +1,5 @@
 import os.path
-from flask import Flask, redirect, request, url_for
+from flask import Flask, redirect, request, url_for, render_template
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.storage import get_default_storage_class
 from flask.ext.uploads import delete, init, save, Upload
@@ -19,17 +19,7 @@ db.create_all()
 def index():
     """List the uploads."""
     uploads = Upload.query.all()
-    return (
-        '<a href="/upload">New Upload</a><br>' +
-        u''.join(
-            u'<a href="%s">%s</a>'
-            u'<form action="/delete/%s" method="POST">'
-            u'  <button type="submit">Delete</button>'
-            u'</form><br>'
-            % (Storage().url(u.name), u.name, u.id)
-            for u in uploads
-        )
-    )
+    return render_template('list.html', base_url=Storage.url, uploads=uploads)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
@@ -39,12 +29,7 @@ def upload():
         print 'saving'
         save(request.files['upload'])
         return redirect(url_for('index'))
-    return (
-        u'<form method="POST" enctype="multipart/form-data">'
-        u'  <input name="upload" type="file">'
-        u'  <button type="submit">Upload</button>'
-        u'</form>'
-    )
+    return render_template('upload.html')
 
 
 @app.route('/delete/<int:id>', methods=['POST'])
